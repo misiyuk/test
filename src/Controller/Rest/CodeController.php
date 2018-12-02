@@ -2,6 +2,7 @@
 
 namespace App\Controller\Rest;
 
+use App\Helper\CodeGenerator;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
@@ -15,11 +16,16 @@ class CodeController extends FOSRestController
      * @Rest\RequestParam(name="export", requirements="xls", default=null, nullable=true, description="Export type.")
      *
      * @param ParamFetcher $fetcher
+     * @param CodeGenerator $generator
      * @return JsonResponse
      */
-    public function generateAction(ParamFetcher $fetcher)
+    public function generateAction(ParamFetcher $fetcher, CodeGenerator $generator)
     {
-        return $this->json([$fetcher->get('export'), $fetcher->get('nb')]);
+        return $this->json([
+            'code' => $generator->generateCode(),
+            $fetcher->get('export'),
+            $fetcher->get('nb'),
+        ]);
     }
 
     /**
