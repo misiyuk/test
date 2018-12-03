@@ -131,6 +131,9 @@
             "ref": "384cec52df45f3bfd46a09930d6960a58872b268"
         }
     },
+    "markbaker/complex": {
+        "version": "1.4.7"
+    },
     "nikic/php-parser": {
         "version": "v4.1.0"
     },
@@ -139,6 +142,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.2"
+    },
+    "phpoffice/phpspreadsheet": {
+        "version": "1.5.2"
     },
     "psr/cache": {
         "version": "1.0.x-dev"
