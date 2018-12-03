@@ -63,7 +63,7 @@ class Codes
     {
         $codes = new self();
         $codes->code = $code;
-        $codes->date = new \DateTime('now', new \DateTimeZone('UTC'));;
+        $codes->date = new \DateTime('now', new \DateTimeZone('UTC'));
 
         return $codes;
     }
