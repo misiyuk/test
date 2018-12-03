@@ -19,11 +19,8 @@ class CodeGenerator
 
     public function generateCode(): string
     {
-        $random = new Random();
-        $lettersCount = $random->getInteger(0, $this->maxLettersCount);
-        $numbersCount = $random->getInteger($lettersCount ? 0 : 1, $this->maxNumbersCount);
-        $lettersPart = $this->getCharsPart($this->letters, $lettersCount);
-        $numbersPart = $this->getCharsPart($this->numbers, $numbersCount);
+        $lettersPart = $this->getCharsPart($this->letters, $this->maxLettersCount);
+        $numbersPart = $this->getCharsPart($this->numbers, $this->maxNumbersCount);
         $codeArray = array_merge($lettersPart, $numbersPart);
         shuffle($codeArray);
 
