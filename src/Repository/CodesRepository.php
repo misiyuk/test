@@ -19,32 +19,30 @@ class CodesRepository extends ServiceEntityRepository
         parent::__construct($registry, Codes::class);
     }
 
-    // /**
-    //  * @return Codes[] Returns an array of Codes objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Codes $data
+     * @return Codes
+     * @throws \Exception
+     */
+    public function save(Codes $data): Codes
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $em = $this->getEntityManager();
+        try{
+            $em->persist($data);
+            $em->flush();
+        } catch (\Exception $e) {
+            throw new \Exception('Can\'t save code');
+        }
 
-    /*
-    public function findOneBySomeField($value): ?Codes
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $data;
     }
-    */
+
+    /**
+     * @param string $code
+     * @return Codes|null
+     */
+    public function get($code): ?Codes
+    {
+        return $this->findOneBy(['code' => $code]);
+    }
 }

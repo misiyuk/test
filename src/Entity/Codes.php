@@ -6,6 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CodesRepository")
+ *
+ * @property int $id
+ * @property string $code
+ * @property \DateTimeInterface $date
  */
 class Codes
 {
@@ -53,5 +57,14 @@ class Codes
         $this->date = $date;
 
         return $this;
+    }
+
+    public static function create($code): self
+    {
+        $codes = new self();
+        $codes->code = $code;
+        $codes->date = new \DateTime('now', new \DateTimeZone('UTC'));;
+
+        return $codes;
     }
 }

@@ -26,6 +26,7 @@ class CodeGenerator
         $numbersPart = $this->getCharsPart($this->numbers, $numbersCount);
         $codeArray = array_merge($lettersPart, $numbersPart);
         shuffle($codeArray);
+
         return implode($codeArray);
     }
 
@@ -37,6 +38,7 @@ class CodeGenerator
             $randomKey = $random->getInteger(0, $size-1);
             $charsPart[] = $chars[$randomKey];
         }
+
         return $charsPart;
     }
 
