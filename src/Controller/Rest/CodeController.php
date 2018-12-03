@@ -34,21 +34,30 @@ class CodeController extends FOSRestController
      *
      * @param ParamFetcher $fetcher
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|JsonResponse
-     * @throws \Throwable
+     * @throws \Exception
      */
     public function generateAction(ParamFetcher $fetcher)
     {
         $nb = $fetcher->get('nb');
         $export = $fetcher->get('export');
 
-        $this->service->generateCodes($nb);
+        try{
+            $this->service->generateCodes($nb);
+        }catch (\Throwable $t){
+            throw new \Exception('Can\'t generate codes.');
+        }
         $codes = $this->service->getCodes();
 
         if ($export) {
             $xlsCreator = new XlsCreator();
-            $xlsCreator->createTmpFile($codes);
+            try{
+                $xlsCreator->createTmpFile($codes);
+            }catch (\Exception $e){
+                throw new \Exception('Can\'t create .xls-file.');
+            }
             $tempFile = $xlsCreator->getTempFile();
             $fileName = $xlsCreator->getFileName();
+
             return $this->file($tempFile, $fileName);
         }
 
